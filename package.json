@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kessler/geometry/issues"
   },
-  "homepage": "https://github.com/kessler/geometry#readme"
+  "homepage": "https://github.com/kessler/geometry#readme",
+  "devDependencies": {
+    "ava": "^4.3.1"
+  }
 }

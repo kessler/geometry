@@ -1,0 +1,43 @@
+const test = require('ava')
+const { Line } = require('../index.js')
+
+const diagonals = [
+	Line.from(2, 2).to(4, 4),
+	Line.from(3, 3).to(6, 6),
+	Line.from(1, 1).to(8, 8),
+	Line.from(12, 12).to(20, 20)
+]
+
+const horizontals = [
+	Line.from(2, 1).to(10, 1),
+	Line.from(5, 1).to(14, 1),
+	Line.from(1, 1).to(16, 1),
+	Line.from(20, 1).to(25, 1)
+]
+
+const verticals = [
+	Line.from(1, 2).to(1, 10),
+	Line.from(1, 5).to(1, 14),
+	Line.from(1, 1).to(1, 16),
+	Line.from(1, 20).to(1, 25)
+]
+
+test('slope', t => {
+	diagonals.forEach(d => t.is(d.mSlope, 45))
+})
+
+test('same axis', t => {
+	verticals.forEach(v1 => {
+		verticals.forEach(v2 => t.true(v1.sameXAxis(v2)))
+	})
+
+	horizontals.forEach(v1 => {
+		horizontals.forEach(v2 => t.true(v1.sameYAxis(v2)))
+	})
+})
+
+test.skip('overlap', t => {
+	const overlap1 = Line.overlap(diagonals[0], diagonals[2])
+	t.not(overlap1, undefined)
+	t.truth(overlap1.equals(Line.from(3, 3).to(4, 4)))
+})
